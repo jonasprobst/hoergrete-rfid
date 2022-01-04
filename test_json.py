@@ -3,8 +3,8 @@
 from json import load
 from subprocess import Popen
 
-print("updating cards.json")
-p = Popen(["curl", "-s", "-S", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json", ">", "cards.json"])
+#print("updating cards.json")
+#p = Popen(["curl", "-s", "-S", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json", ">", "cards.json"])
 
 print("reading file")
 with open("cards.json", "r") as file:

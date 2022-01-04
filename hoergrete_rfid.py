@@ -15,8 +15,8 @@ from json import load
 reader = SimpleMFRC522()
 lastId = 0
 
-p = Popen(["echo", "updating cards.json from github..."])
-p = Popen(["curl", "-s", "-S", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json", ">", "cards.json"])
+#p = Popen(["echo", "updating cards.json from github..."])
+#p = Popen(["curl", "-s", "-S", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json", ">", "cards.json"])
 
 with open("cards.json", "r") as file:
     rfidCards = load(file)	
