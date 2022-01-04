@@ -13,6 +13,7 @@ try:
         id, text  = reader.read()
         if id != lastId:
             p = Popen(["echo", "Card ID: " + str(id)])
+            lastId = id
         sleep(5)
 except KeyboardInterrupt:
     raise
