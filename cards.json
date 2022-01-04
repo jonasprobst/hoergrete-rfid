@@ -1,14 +1,14 @@
 { 
-	"000000001":{	
-		"name":"spotify track",
-		"uri":"spotify:track:7GhIk7Il098yCjg4BQjzvb"
+	"249056798748":{	
+		"name":"d Schliermer Chind - Mir gönd in Zoo",
+		"uri":"spotify:album:7vCPIM7KPfiVY4XmYqyjS7"
 	},
-	"000000002":{
-		"name":"local track - might not even need this...",
-		"uri":"local:track:unknownCard.mp3"
+	"585518925496":{
+		"name":"supreme",
+		"uri":"spotify:track:5mu1uv8RmzDkF8foePK5qa"
 	},
-	"000000003":{
-		"name":"local track - might not even need this...",
-		"uri":"tunein:url:xyz"
+	"786988442629":{
+		"name":"mobility",
+		"uri":""
 	}
 }
