@@ -1,0 +1,14 @@
+{ 
+	"000000001":{	
+		"name":"spotify track",
+		"uri":"spotify:track:7GhIk7Il098yCjg4BQjzvb"
+	},
+	"000000002":{
+		"name":"local track - might not even need this...",
+		"uri":"local:track:unknownCard.mp3"
+	},
+	"000000003":{
+		"name":"local track - might not even need this...",
+		"uri":"tunein:url:xyz"
+	}
+}
