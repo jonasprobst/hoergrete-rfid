@@ -14,5 +14,7 @@ try:
         if id != lastId:
             p = Popen(["echo", "Card ID: " + str(id)])
         sleep(5)
+except KeyboardInterrupt:
+    raise
 finally:
     GPIO.cleanup()
