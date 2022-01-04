@@ -7,41 +7,46 @@
 
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
-from num2words import num2words
-import json
 from subprocess import Popen
+from time import sleep
+from num2words import num2words
+from json import load
 
 reader = SimpleMFRC522()
+lastId = 0
 
 p = Popen(["echo", "updating cards.json from github..."])
-p = Popen(["curl", "-s", "-S", "https://raw.githubusercontent.com/jonasprobst/hoergret_rfid/master/cards.json", ">", "cards.json"])
+p = Popen(["curl", "-s", "-S", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json", ">", "cards.json"])
 
-with open("/path/to/file", "r") as file:
-    rfidCards = json.load(file)	
+with open("cards.json", "r") as file:
+    rfidCards = load(file)	
 
 try:
+    p = Popen(["espeak", "-ven-wm+f2", "-a15", "'ello duck, I'm ready!'", "2>/dev/null"])
+    p.wait()
     while True:
-        # wait for a card to be scanned
-        cardId = reader.read()
-        p = Popen(["echo", "Scanned a card: " + str(cardId)])
-        if (cardId in rfidCards.values()):
-            # this is a known card id. hit play it on mopidy
-            # print("Known card: "+cardId+" - hit play on: "+trackUri)
-            trackUri = rfidCards[cardId]['uri']
-            p = Popen(["echo", "Known card. hit play on track " + str(trackUri)])
-            p = Popen(["mpc", "stop", "-q", "&&",
-                       "mpc", "clear", "-q", "&&",
-                       "mpc", "add", str(trackUri), "&&",
-                       "mpc", "play"])
-        else:
-            # this is an unknown card id. read it out loud
-            # write it down and add it to the cards list on github
-            # the list will be synced on every startup
-            #print("Unknown card: "+cardId+" - read it out loud...")
-            p = Popen(["echo", "Unknown card. Read out the card id"])
-            textToSpeak = num2words(cardId)
-            p = Popen(
-                ["espeak", "sorry, i do not know this card", "2>/dev/null"])
-            p = Popen(["espeak", "-g180", textToSpeak, "2>/dev/null"])
+        id, text = reader.read()
+        if id != lastId:
+            lastId = id
+            if (id in rfidCards.values()):
+                trackUri = rfidCards[id]['uri']
+                p = Popen(["echo", "Card ID: " + str(id)])
+                p = Popen(["echo", "Track URI: " + str(trackUri)])
+                #p = Popen(["mpc", "stop", "-q", "&&",
+                #        "mpc", "clear", "-q", "&&",
+                #        "mpc", "add", str(trackUri), "&&",
+                #        "mpc", "play"])
+            else:
+                # spell digits of the id rather than the number
+                textToSpeak = ""
+                for digit in str(id):
+                    textToSpeak += num2words(int(digit)) + ", "
+                p = Popen(["espeak", "-ven-wm+f2", "-a15", "sorry me duck, I've never seen this ID before", "2>/dev/null"])
+                p.wait()
+                p = Popen(["espeak", "-ven-wm+f2", "-a15", "-g25", textToSpeak, "2>/dev/null"])
+                p.wait()      
+        sleep(5)
+except KeyboardInterrupt:
+    raise
 finally:
     GPIO.cleanup()
