@@ -3,15 +3,16 @@
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 from subprocess import Popen
+from time import sleep
 
 reader = SimpleMFRC522()
-lastCardId = 0
+lastId = 0
 
 try:
     while True:
-        cardId = reader.read()
-        if cardId != lastCardId:
-            p = Popen(["echo", "Card ID: " + str(cardId)])
-        
+        id, text  = reader.read()
+        if id != lastId:
+            p = Popen(["echo", "Card ID: " + str(id)])
+        sleep(5)
 finally:
     GPIO.cleanup()
