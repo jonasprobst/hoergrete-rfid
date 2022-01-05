@@ -96,99 +96,45 @@ sudo systemctl status mopidy
 `sudo usermod -a -G gpio mopidy`
 `sudo python3 -m pip install Mopidy-Raspberry-GPIO`
 
-```
-
-```
-
-
-
-
-
-
----
-# Python program to update
-# JSON
- 
- 
-import json
- 
- 
-# function to add to JSON
-def write_json(new_data, filename='data.json'):
-    with open(filename,'r+') as file:
-          # First we load existing data into a dict.
-        file_data = json.load(file)
-        # Join new_data with file_data inside emp_details
-        file_data["emp_details"].append(new_data)
-        # Sets file's current position at offset.
-        file.seek(0)
-        # convert back to json.
-        json.dump(file_data, file, indent = 4)
- 
-    # python object to be appended
-y = {"emp_name":"Nikhil",
-     "email": "nikhil@geeksforgeeks.org",
-     "job_profile": "Full Time"
-    }
-     
-write_json(y)
-
 ---
 
-# Python program to demonstrate
-# Conversion of JSON data to
-# dictionary
- 
- 
-# importing the module
-import json
- 
-# Opening JSON file
-with open('data.json') as json_file:
-    data = json.load(json_file)
- 
-    # for reading nested data [0] represents
-    # the index value of the list
-    print(data['people1'][0])
-     
-    # for printing the key-value pair of
-    # nested dictionary for loop can be used
-    print("\nPrinting nested dictionary as a key-value pair\n")
-    for i in data['people1']:
-        print("Name:", i['name'])
-        print("Website:", i['website'])
-        print("From:", i['from'])
-        print()
+## Install
 
----
-# Cehck if a vlaue exist in a dictonary
-# Dictionary of string and int
-word_freq = {
-    "Hello": 56,
-    "at": 23,
-    "test": 43,
-    "this": 78
-}
+1. follow my guide (26.12.) for setup pi and setup audio
 
-value = 43
-# python check if value exist in dict using "in" & values()
-if value in word_freq.values():
-    print(f"Yes, Value: '{value}' exists in dictionary")
-else:
-    print(f"No, Value: '{value}' does not exists in dictionary")
+### installing and configuring mopidy
+
+https://www.makeuseof.com/turn-your-raspberry-pi-into-a-home-music-server-with-mopidy/
 
 
---- 
+### mopidy gpio
+https://pypi.org/project/mopidy-raspberry-gpio/
 
-# my json file
+### hoergrete rfid script
 
-{
-  "rfid_cards": [
-    {
-      "id":"123456",
-      "name":"zoo",
-      "url":"spotify:track:xyz",
-    }
+1. sudo apt install python3-dev python3-pip espeak git
+1. sudo pip3 install spidev mfrc522 num2words
+1. git clone https://github.com/jonasprobst/hoergrete-rfid.git
+1. cd hoergrete-rfid
+1. (git reset --hard && git pull)
 
-  ]
-}
+1. Follow this to install mopidy: https://www.makeuseof.com/turn-your-raspberry-pi-into-a-home-music-server-with-mopidy/
+  * a few changes:
+    ```
+    [audio]
+    output = alsasink device=hw:0,0
+    ```
+
+
+1. once everything works: autorun hoergrete on boot
+  * sudo nano /etc/rc.local 
+  * Add the following after comments and before EXIT 0
+    ```
+    # Hoergrete autorun
+    sudo python3 home/pi/hoergrete-rfid/hoergrete_rfid.py &
+    ```
+    * sudo chmod +x /etc/rc.local
+
+### samba to add local music
+
+https://pimylifeup.com/raspberry-pi-samba/

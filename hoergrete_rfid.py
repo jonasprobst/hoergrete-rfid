@@ -40,17 +40,17 @@ try:
             lastId = id
             if (str(id) in cards):
                 trackUri = cards[str(id)]["uri"]
-                print("Hit play! ID: " + str(id) + " URI: " + trackUri)
+                print("Hit play! ID: %s URI: %s" % (id, trackUri))
                 # p = Popen(["mpc", "stop", "-q", "&&",
                 #        "mpc", "clear", "-q", "&&",
                 #        "mpc", "add", str(trackUri), "&&",
                 #        "mpc", "play"])
             else:
                 # spell digits of the id rather than the number
-                textToSpeak = "New ID!"
+                textToSpeak = "Card ID, "
                 for digit in str(id):
                     textToSpeak += num2words(int(digit)) + ", "
-                p = Popen(["espeak", "-ven-wm+f2", "-a15", "-g15", textToSpeak, "2>/dev/null"], stderr=DEVNULL)
+                p = Popen(["espeak", "-ven-wm+f2", "-a20", "-g15", textToSpeak, "2>/dev/null"], stderr=DEVNULL)
                 p.wait()
                 cards = getCards()
         sleep(5)
