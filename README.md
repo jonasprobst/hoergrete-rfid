@@ -14,6 +14,7 @@ Hörgrete mach 2 - rfid enabled.
 * https://raspberrypi-guide.github.io/programming/run-script-on-boot
 * https://raspberry-projects.com/pi/software_utilities/email/ssmtp-to-send-emails 
 * https://pimylifeup.com/raspberry-pi-rfid-rc522/
+* https://wiretuts.com/installing-mopidy-music-server-on-raspberry-pi
 
 ## Vision
 
@@ -102,14 +103,6 @@ sudo systemctl status mopidy
 
 1. follow my guide (26.12.) for setup pi and setup audio
 
-### installing and configuring mopidy
-
-https://www.makeuseof.com/turn-your-raspberry-pi-into-a-home-music-server-with-mopidy/
-
-
-### mopidy gpio
-https://pypi.org/project/mopidy-raspberry-gpio/
-
 ### hoergrete rfid script
 
 1. sudo apt install python3-dev python3-pip espeak git
@@ -118,13 +111,51 @@ https://pypi.org/project/mopidy-raspberry-gpio/
 1. cd hoergrete-rfid
 1. (git reset --hard && git pull)
 
-1. Follow this to install mopidy: https://www.makeuseof.com/turn-your-raspberry-pi-into-a-home-music-server-with-mopidy/
+### samba
+
+1. Follow this to install samba: https://pimylifeup.com/raspberry-pi-samba/
   * a few changes:
+  * yes to WINS Settings when prompted
+  * use generated password for user pi not raspberry
+
+### mopidy
+
+1. Follow this to install mopidy: https://www.makeuseof.com/turn-your-raspberry-pi-into-a-home-music-server-with-mopidy/ 
+1. a few **important** changes:
+  * **do not give iris sudo permission** in step 3. This command is broken an will kill sudo for all users!
+  * change audio output to this
     ```
     [audio]
+    mixer_volume = 50
     output = alsasink device=hw:0,0
     ```
+  * local share is '/home/pi/shared'
+  * `sudo python3 -m pip install Mopidy-Spotify`failed for me
+  * i had to manually install `sudo python3 -m pip install pyspotify`and rerun Mopidy-Spotify fo it to work
+  * (i actually also installed `sudo apt install libspotify-dev`following another tutorial - might no be needed)
+  * this caused mopidy to freeze on startup 
+  * so i `sudo python3 -m pip install --upgrade --force-reinstall Mopidy-Spotify`
+  * that got mopidy running. had to restart the server in iris and logout and login again. then it worked... strange
+  
 
+
+
+### mopidy gpio
+https://pypi.org/project/mopidy-raspberry-gpio/
+
+**use sudo to install!!**
+
+sudo python3 -m pip install Mopidy-Raspberry-GPIO
+
+```
+[raspberry-gpio]
+enabled = true
+bcm17 = play_pause,active_low,250
+bcm27 = prev,active_low,250
+bcm22 = next,active_low,250
+```
+
+### finishing touches
 
 1. once everything works: autorun hoergrete on boot
   * sudo nano /etc/rc.local 
@@ -135,6 +166,3 @@ https://pypi.org/project/mopidy-raspberry-gpio/
     ```
     * sudo chmod +x /etc/rc.local
 
-### samba to add local music
-
-https://pimylifeup.com/raspberry-pi-samba/
