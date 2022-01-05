@@ -15,11 +15,11 @@ from json import load
 reader = SimpleMFRC522()
 lastId = 0
 
-#p = Popen(["echo", "updating cards.json from github..."])
-#p = Popen(["curl", "-s", "-S", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json", ">", "cards.json"])
+print("updating cards.json from github...")
+p = Popen(["curl", "-s", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json", "-o", "cards.json"])
 
 with open("cards.json", "r") as file:
-    rfidCards = load(file)	
+    cards = load(file)	
 
 try:
     p = Popen(["espeak", "-ven-wm+f2", "-a15", "'ello duck, I'm ready!'", "2>/dev/null"])
@@ -28,10 +28,9 @@ try:
         id, text = reader.read()
         if id != lastId:
             lastId = id
-            if (id in rfidCards.values()):
-                trackUri = rfidCards[id]['uri']
-                p = Popen(["echo", "Card ID: " + str(id)])
-                p = Popen(["echo", "Track URI: " + str(trackUri)])
+            if (str(id) in cards):
+                trackUri = cards[str(id)]["uri"]
+                print("card found! ID: " + str(id) + " URI: " + trackUri)
                 #p = Popen(["mpc", "stop", "-q", "&&",
                 #        "mpc", "clear", "-q", "&&",
                 #        "mpc", "add", str(trackUri), "&&",
