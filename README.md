@@ -136,9 +136,18 @@ sudo systemctl status mopidy
   * this caused mopidy to freeze on startup 
   * so i `sudo python3 -m pip install --upgrade --force-reinstall Mopidy-Spotify`
   * that got mopidy running. had to restart the server in iris and logout and login again. then it worked... strange
+
+  sudo nano /etc/mopidy/mopidy.conf
+
+  sudo mopidyctl config
+
+  sudo systemctl restart mopidy
+  sudo systemctl status mopidy
+
+  sudo mopidyctl local scan
+  sudo mopidyctl local clear
   
-
-
+  got missing tracks out of iris by /setting/reset settings
 
 ### mopidy gpio
 https://pypi.org/project/mopidy-raspberry-gpio/
@@ -154,6 +163,15 @@ bcm17 = play_pause,active_low,250
 bcm27 = prev,active_low,250
 bcm22 = next,active_low,250
 ```
+
+### mopidy-mpd to controll it using mpc
+
+sudo python3 -m pip install Mopidy-MPD
+sudo apt install mpc
+
+mpc ls
+in iris go to tracks and under ... copy URI
+
 
 ### finishing touches
 
