@@ -16,6 +16,10 @@ import urllib.request
 reader = SimpleMFRC522()
 lastId = 0
 
+
+
+
+
 def getCards():
     print("updating cards.json from github...")
     with urllib.request.urlopen("https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json") as url:
@@ -23,15 +27,14 @@ def getCards():
         print(data)
     return data
 
-# do a git pull as startup script
-# or do this after every 
-# p = Popen(["curl", "-s", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json", "-o", "cards.json"])
-#with open("cards.json", "r") as file:
-#    cards = load(file)
+# TODO: 
+# do a git pull as startup script instead of this more dynamic aproach?
+# could use a diffrent repo and git push the new id's on there for easy editing...
 cards = getCards()
 
-p = Popen(["espeak", "-ven-wm+f2", "-a15", "ello lovely, let's go!'", "2>/dev/null"], stderr=DEVNULL)
-p.wait()
+# save the playout and use another way to play it to save resources?
+p = Popen(["espeak", "-ven-wm+f2", "-a25", "alright! let's go!'", "2>/dev/null"], stderr=DEVNULL).wait()
+#p.wait()
 
 try:
     while True:
@@ -53,7 +56,10 @@ try:
                 # mpc volume +10  
             else:
                 # spell digits of the id rather than the number
-                # Could save the card id in /var/lib/mopidy/rfid/
+                # 
+                # TODO:
+                # Could save the card id in /var/lib/mopidy/rfid/ (maybe theres a way to read it if it's html or something?)
+                # then only reload the json when the file exist there already
 
                 textToSpeak = "Card ID, "
                 for digit in str(id):
@@ -65,4 +71,5 @@ try:
 except KeyboardInterrupt:
     raise
 finally:
+    p = Popen(["mpc", "stop"])
     GPIO.cleanup()
