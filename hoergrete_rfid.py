@@ -30,7 +30,9 @@ try:
             lastId = id
             if (str(id) in cards):
                 trackUri = cards[str(id)]["uri"]
-                print("card found! ID: " + str(id) + " URI: " + trackUri)
+                trackName = cards[str(id)]["name"]
+                print("Hit play! ID: " + str(id) + " URI: " + trackUri)
+                p = Popen(["espeak", "-ven-wm+f2", "-a15", trackUri, "2>/dev/null"])
                 #p = Popen(["mpc", "stop", "-q", "&&",
                 #        "mpc", "clear", "-q", "&&",
                 #        "mpc", "add", str(trackUri), "&&",
