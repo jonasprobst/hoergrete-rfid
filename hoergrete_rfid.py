@@ -47,10 +47,10 @@ try:
                 #        "mpc", "play"])
             else:
                 # spell digits of the id rather than the number
-                textToSpeak = "New I D!"
+                textToSpeak = "New ID!"
                 for digit in str(id):
                     textToSpeak += num2words(int(digit)) + ", "
-                p = Popen(["espeak", "-ven-wm+f2", "-a15", "-g50", textToSpeak, "2>/dev/null"], stderr=DEVNULL)
+                p = Popen(["espeak", "-ven-wm+f2", "-a15", "-g15", textToSpeak, "2>/dev/null"], stderr=DEVNULL)
                 p.wait()
                 cards = getCards()
         sleep(5)
