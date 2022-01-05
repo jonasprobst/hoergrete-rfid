@@ -11,13 +11,13 @@ from subprocess import Popen
 from time import sleep
 from num2words import num2words
 from json import loads
-from urllib import urlopen
+import urllib.request
 
 reader = SimpleMFRC522()
 lastId = 0
 
 def getCards():
-    with urlopen("https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json") as url:
+    with urllib.request.urlopen("https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json") as url:
         data = loads(url.read().decode())
     return data
 
