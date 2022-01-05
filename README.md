@@ -94,8 +94,9 @@ to brows the local media folder and guess the URI `mpc ls` came in handy.
   * sudo nano /etc/rc.local 
   * Add the following after comments and before EXIT 0
     ```
-    # Hoergrete autorun
-    sudo python3 home/pi/hoergrete-rfid/hoergrete_rfid.py &
+    # Hoergrete firmware update and autorun
+    # git -C /home/pi/hoergrete-rfid/ pull
+    sudo python3 home/pi/hoergrete-rfid/hoergrete.py &
     ```
   * sudo chmod +x /etc/rc.local
   * cross your fingers and reboot
@@ -106,7 +107,7 @@ it's easier than it look ... right :-S
 
 ### upload new music
 
-1. get music ready with https://quodlibet.readthedocs.io/en/latest/index.html
+1. get music ready with exFalso (https://quodlibet.readthedocs.io/en/latest/downloads.html)
 1. connet to samba drive and upload the music to hoergrete
 1. ssh into hoergrete
 1. `sudo mopidyctl local scan`
