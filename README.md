@@ -110,7 +110,7 @@ it's easier than it look ... right :-S
 1. get music ready with exFalso (https://quodlibet.readthedocs.io/en/latest/downloads.html)
 1. connet to samba drive and upload the music to hoergrete
 1. ssh into hoergrete
-1. `sudo mopidyctl local scan`
+1. `sudo mopidyctl local scan` (when changing exisiting files do `sudo mopidyctl local clear` and reset settings in iris first)
 1. `sudo systemctl restart mopidy`
 1. check on webinterface unter Browse/Local Files/Tracks
 

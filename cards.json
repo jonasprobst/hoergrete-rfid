@@ -7,14 +7,20 @@
 	},
 	"249056798748":{
 		"name":"d Schliermer Chind - Mir gönd in Zoo - 01",
-		"uri":"local:track:d%20Schliermer%20Chind/Mir%20g%C3%B6nd%20in%20Zoo/01_Mir%20g%C3%B6nd%20in%20Zoo.mp3",
+		"uri":"local:album:md5:a0bc864dbcec3bd56b1f9c977fe9a7be",
 		"rdm":"off",
 		"sgl":"off"
 	},
 	"786988442629":{
 		"name":"mobility",
-		"uri":"local:track:d%20Schliermer%20Chind/Mir%20g%C3%B6nd%20in%20Zoo/01_Mir%20g%C3%B6nd%20in%20Zoo.mp3",
+		"uri":"local:album:md5:5c4a52a606910a56905d8c855e628096",
 		"rdm":"off",
 		"sgl":"off"
+	},
+	"584183880453":{
+		"name":"mario",
+		"uri":"local:track:Super%20Mario%20Bros/Super%20Mario%20Bros%20The%208-Bit%20Opera/Super%20Mario%20Bros%20The%208-Bit%20Opera.mp3",
+		"rdm":"off",
+		"sgl":"on"
 	}
 }
