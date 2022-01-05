@@ -5,7 +5,7 @@
 from subprocess import Popen, DEVNULL
 from time import sleep
 
-def play(uri, rdm="off", sgl="off", vol=0):
+def play(uri, rdm="off", sgl="off", vol=None):
     # https://www.systutorials.com/docs/linux/man/1-mpc/
     # other pontentially useful comands: 
     # - load <file> (loads <file> as playlist)
@@ -17,7 +17,7 @@ def play(uri, rdm="off", sgl="off", vol=0):
     p = Popen(["mpc", "stop"], stdout=DEVNULL).wait()
     p = Popen(["mpc", "clear"], stdout=DEVNULL).wait()
     p = Popen(["mpc", "add", str(uri)], stdout=DEVNULL).wait()
-    if vol != 0:
+    if not vol is None:
         p = Popen(["mpc", "volume", vol], stdout=DEVNULL).wait()
     p = Popen(["mpc", "random", str(rdm)], stdout=DEVNULL).wait()
     p = Popen(["mpc", "single", str(sgl)], stdout=DEVNULL).wait()
@@ -30,4 +30,6 @@ play("local:album:md5:9160794fee93e46d71064f75be07909f", "on")
 sleep(5)
 play("local:album:md5:9160794fee93e46d71064f75be07909f", "on")
 sleep(5)
+play("local:album:md5:9160794fee93e46d71064f75be07909f", "off", "off", 20)
+sleep(10)
 p = Popen(["mpc", "stop"], stdout=DEVNULL).wait()
