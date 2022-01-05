@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from json import loads
+from json import load
 from subprocess import Popen
 
 print("updating cards.json")
@@ -8,7 +8,7 @@ p = Popen(["curl", "-s", "https://raw.githubusercontent.com/jonasprobst/hoergret
 
 print("reading file")
 with open("cards.json", "r") as file:
-    cards = loads(file)	
+    cards = load(file)	
     print(cards)
 
 id = 249056798748
