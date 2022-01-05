@@ -2,11 +2,13 @@
 	"249056798748":{	
 		"name":"Kiri and Lou - Singalongsongs",
 		"uri":"local:album:md5:9160794fee93e46d71064f75be07909f",
-		"rdm":"on"
+		"rdm":"on",
+		"sgl":"off"
 	},
 	"585518925496":{
-		"name":"batman",
-		"uri":"local:track:batman/01_Batman_Theme.mp3",
-		"rdm":"off"
+		"name":"d Schliermer Chind - Mir gönd in Zoo - 01",
+		"uri":"local:track:d%20Schliermer%20Chind/Mir%20g%C3%B6nd%20in%20Zoo/01_Mir%20g%C3%B6nd%20in%20Zoo.mp3",
+		"rdm":"off",
+		"sgl":"off"
 	}
 }

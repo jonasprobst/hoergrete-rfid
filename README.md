@@ -183,4 +183,9 @@ in iris go to tracks and under ... copy URI
     sudo python3 home/pi/hoergrete-rfid/hoergrete_rfid.py &
     ```
     * sudo chmod +x /etc/rc.local
+1. `sudo apt-get install python3-mutagen` 
+  * in case you need to edit those mp3 tags
+  * checkpout the docs https://mutagen.readthedocs.io/en/latest/index.html
+  * cmd tool: `mid3v2`
+
 

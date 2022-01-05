@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 # Inspired by:
 # - https://pimylifeup.com/raspberry-pi-rfid-rc522/
 # - https://pimylifeup.com/raspberry-pi-rfid-attendance-system/
@@ -13,11 +14,23 @@ from num2words import num2words
 from json import loads
 import urllib.request
 
-reader = SimpleMFRC522()
-lastId = 0
+def play(uri, rdm="off", sgl="off", vol=None):
+    # https://www.systutorials.com/docs/linux/man/1-mpc/
+    # other pontentially useful comands:
+    # - load <file> (loads <file> as playlist)
+    # - ls[<directory>] (lists all files/  folder in <directory>)
+    # - single <on|off>
+    # - repeat <on|off>
+    # - volume [+-]<num> (set the volume to <num> odr adjust it by +/-<num>)
 
-
-
+    p = Popen(["mpc", "stop"], stdout=DEVNULL).wait()
+    p = Popen(["mpc", "clear"], stdout=DEVNULL).wait()
+    p = Popen(["mpc", "add", str(uri)], stdout=DEVNULL).wait()
+    if vol is not None:
+        p = Popen(["mpc", "volume", str(vol)], stdout=DEVNULL).wait()
+    p = Popen(["mpc", "random", str(rdm)], stdout=DEVNULL).wait()
+    p = Popen(["mpc", "single", str(sgl)], stdout=DEVNULL).wait()
+    p = Popen(["mpc", "play"])
 
 
 def getCards():
@@ -27,14 +40,20 @@ def getCards():
         print(data)
     return data
 
-# TODO: 
+# TODO:
 # do a git pull as startup script instead of this more dynamic aproach?
 # could use a diffrent repo and git push the new id's on there for easy editing...
 cards = getCards()
 
+reader = SimpleMFRC522()
+lastId = 0
+
+# create and clean the dir new card id's are saved to (you can brows them in iris)
+p = Popen(["sudo", "mkdir", "-p", "/var/lib/mopidy/rfid"]).wait()
+
 # save the playout and use another way to play it to save resources?
 p = Popen(["espeak", "-ven-wm+f2", "-a25", "alright! let's go!'", "2>/dev/null"], stderr=DEVNULL).wait()
-#p.wait()
+# p.wait()
 
 try:
     while True:
@@ -44,28 +63,19 @@ try:
             if (str(id) in cards):
                 uri = cards[str(id)]["uri"]
                 rdm = cards[str(id)]["rdm"]
-                print("Hit play! ID: %s URI: %s RDM: %s" % (id, uri, rdm))
-                # p = Popen(["mpc", "stop", "-q", "&&",
-                #        "mpc", "clear", "-q", "&&",
-                #        "mpc", "add", str(uri), "&&",
-                #        "mpc", "random", str(rdm), "&&",
-                #        "mpc", "play"])
-                # 
-                # some more options 
-                # mpc random on
-                # mpc volume +10  
+                sgl = cards[str(id)]["sgl"]
+                play(uri, rdm, sgl)
             else:
                 # spell digits of the id rather than the number
-                # 
-                # TODO:
-                # Could save the card id in /var/lib/mopidy/rfid/ (maybe theres a way to read it if it's html or something?)
-                # then only reload the json when the file exist there already
-
                 textToSpeak = "Card ID, "
                 for digit in str(id):
                     textToSpeak += num2words(int(digit)) + ", "
-                p = Popen(["espeak", "-ven-wm+f2", "-a20", "-g15", textToSpeak, "2>/dev/null"], stderr=DEVNULL)
-                p.wait()
+                p = Popen(["espeak", "-ven-wm+f2", "-a20", "-g15", textToSpeak, "2>/dev/null"], stderr=DEVNULL).wait()
+
+                # write a file with the id as name to mopidy so it can be viewed in iris
+                # TODO: only reload the json when the file exists already (save some resources, maybe?)
+                p = Popen(["sudo", "rm", "-r", "/var/lib/mopidy/rfid/*"]).wait()
+                p = Popen(["sudo", "touch", "/var/lib/mopidy/rfid/"+str(id)]).wait()
                 cards = getCards()
         sleep(5)
 except KeyboardInterrupt:

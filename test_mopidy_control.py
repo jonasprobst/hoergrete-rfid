@@ -17,11 +17,11 @@ def play(uri, rdm="off", sgl="off", vol=None):
     p = Popen(["mpc", "stop"], stdout=DEVNULL).wait()
     p = Popen(["mpc", "clear"], stdout=DEVNULL).wait()
     p = Popen(["mpc", "add", str(uri)], stdout=DEVNULL).wait()
-    if not vol is None:
-        p = Popen(["mpc", "volume", str(vol)]).wait()
+    if vol is not None:
+        p = Popen(["mpc", "volume", str(vol)], stdout=DEVNULL).wait()
     p = Popen(["mpc", "random", str(rdm)], stdout=DEVNULL).wait()
     p = Popen(["mpc", "single", str(sgl)], stdout=DEVNULL).wait()
-    p = Popen(["mpc", "play"], stdout=DEVNULL)
+    p = Popen(["mpc", "play"])
 
 
 play("local:album:md5:9160794fee93e46d71064f75be07909f", "on")
