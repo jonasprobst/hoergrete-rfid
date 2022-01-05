@@ -7,7 +7,7 @@
 
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
-from subprocess import Popen, STDOUT, DEVNULL
+from subprocess import Popen, DEVNULL
 from time import sleep
 from num2words import num2words
 from json import loads
