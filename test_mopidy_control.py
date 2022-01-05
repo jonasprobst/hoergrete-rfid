@@ -18,7 +18,7 @@ def play(uri, rdm="off", sgl="off", vol=None):
     p = Popen(["mpc", "clear"], stdout=DEVNULL).wait()
     p = Popen(["mpc", "add", str(uri)], stdout=DEVNULL).wait()
     if not vol is None:
-        p = Popen(["mpc", "volume", vol], stdout=DEVNULL).wait()
+        p = Popen(["mpc", "volume", str(vol)], stdout=DEVNULL).wait()
     p = Popen(["mpc", "random", str(rdm)], stdout=DEVNULL).wait()
     p = Popen(["mpc", "single", str(sgl)], stdout=DEVNULL).wait()
     p = Popen(["mpc", "play"], stdout=DEVNULL)
