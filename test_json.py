@@ -13,7 +13,7 @@ with open("cards.json", "r") as file:
 
 id = 249056798748
 print("check if id is known:", str(id))
-if (str(id) in rfidCards.values()):
+if str(id) in rfidCards.values():
     trackUri = rfidCards[str(id)]["uri"]
     trackName = rfidCards[str(id)]["name"]
     print("id found. Track URI: ", trackUri)
