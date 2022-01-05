@@ -4,7 +4,7 @@ from json import load
 from subprocess import Popen
 
 print("updating cards.json")
-p = Popen(["curl", "-s", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json$RANDOM", "-o", "cards.json"])
+p = Popen(["curl", "-s", "https://raw.githubusercontent.com/jonasprobst/hoergrete-rfid/main/cards.json", "-o", "cards.json"])
 
 print("reading file")
 with open("cards.json", "r") as file:
