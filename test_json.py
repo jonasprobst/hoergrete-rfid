@@ -14,9 +14,10 @@ with open("cards.json", "r") as file:
 id = 249056798748
 print("check if id is known:", str(id))
 if str(id) in cards:
-    trackUri = cards[str(id)]["uri"]
-    trackName = cards[str(id)]["name"]
-    print("id found. Track URI: ", trackUri)
-    print("id found. Track URI: ", trackName)
+    uri = cards[str(id)]["uri"]
+    name = cards[str(id)]["name"]
+    rdm = cards[str(id)]["rdm"]
+    print("id found. URI: %s Name: %s rdm: %s" % (uri, name, rdm))
+
 else:
     print("something's fishy here...")

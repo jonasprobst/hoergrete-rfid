@@ -39,14 +39,22 @@ try:
         if id != lastId:
             lastId = id
             if (str(id) in cards):
-                trackUri = cards[str(id)]["uri"]
-                print("Hit play! ID: %s URI: %s" % (id, trackUri))
+                uri = cards[str(id)]["uri"]
+                rdm = cards[str(id)]["rdm"]
+                print("Hit play! ID: %s URI: %s RDM: %s" % (id, uri, rdm))
                 # p = Popen(["mpc", "stop", "-q", "&&",
                 #        "mpc", "clear", "-q", "&&",
-                #        "mpc", "add", str(trackUri), "&&",
+                #        "mpc", "add", str(uri), "&&",
+                #        "mpc", "random", str(rdm), "&&",
                 #        "mpc", "play"])
+                # 
+                # some more options 
+                # mpc random on
+                # mpc volume +10  
             else:
                 # spell digits of the id rather than the number
+                # Could save the card id in /var/lib/mopidy/rfid/
+
                 textToSpeak = "Card ID, "
                 for digit in str(id):
                     textToSpeak += num2words(int(digit)) + ", "

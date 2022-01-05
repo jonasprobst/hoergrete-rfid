@@ -1,18 +1,20 @@
 #!/usr/bin/env python
 
-# https://github.com/ismailof/mopidy-json-client/blob/master/examples/demo_cli.py
+# Alternative (seems EOF tho): https://github.com/ismailof/mopidy-json-client/blob/master/examples/demo_cli.py
 
-from mopidy-json-client import MopidyClient
+from subprocess import Popen
+from time import sleep
 
-mopidy = MopidyClient()
+def play(uri, rdm):
+    p = Popen(["mpc", "stop", "-q", "&&",
+               "mpc", "clear", "-q", "&&",
+               "mpc", "add", str(uri), "&&",
+               "mpc", "random", str(rdm), "&&",
+               "mpc", "play"])
 
-mopidy.tracklist.clear()
-mopidy.tracklist.add("spotify:track:4ZiMMIaoK9sSI1iQIvHSq8")
-mopidy.playback.play()
 
-
-#'test': ['spotify:track:4ZiMMIaoK9sSI1iQIvHSq8',
-#                            'tunein:station:s24989',
-#                            'podcast+http://feeds.feedburner.com/aokishouse#http://traffic.libsyn.com/steveaoki/037_AOKIS_HOUSE_-_STEVE_AOKI.mp3',
-#                            'bt:stream',
-#                            ],
+play("local:album:md5:9160794fee93e46d71064f75be07909f", "on")
+sleep(10)
+play("local:album:md5:9160794fee93e46d71064f75be07909f", "on")
+sleep(10)
+play("local:album:md5:9160794fee93e46d71064f75be07909f", "on")
