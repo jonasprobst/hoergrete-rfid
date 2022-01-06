@@ -35,12 +35,16 @@
 		"rdm":"off",
 		"sgl":"on"
 	},
+	"585514009155":{
+		"name":"cluedo yellow",
+		"uri":"spotify:playlist:72WxvtEEgLrn6KFrY2L1Ni",
+		"rdm":"off",
+		"sgl":"on"
+	},
 	"585524558233":{
 		"name":"cluedo black",
-		"uri":"spotify:playlist:72WxvtEEgLrn6KFrY2L1Ni",
+		"uri":"spotify:playlist:bf46eedc2269415e",
 		"rdm":"off",
 		"sgl":"on"
 	}
 }
-
-https://open.spotify.com/playlist/?si=bf46eedc2269415e
