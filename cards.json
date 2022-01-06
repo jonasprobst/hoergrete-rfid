@@ -22,5 +22,11 @@
 		"uri":"local:track:Super%20Mario%20Bros/Super%20Mario%20Bros%20The%208-Bit%20Opera/Super%20Mario%20Bros%20The%208-Bit%20Opera.mp3",
 		"rdm":"off",
 		"sgl":"on"
+	},
+	"0":{
+		"name":"batman",
+		"uri":"local:album:md5:471e931312d34cb7590aec47097d069e",
+		"rdm":"off",
+		"sgl":"on"
 	}
 }
