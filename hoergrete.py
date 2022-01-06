@@ -10,7 +10,7 @@ from mfrc522 import SimpleMFRC522
 from subprocess import Popen, DEVNULL
 from time import sleep
 from num2words import num2words
-from json import loads
+from json import load, dumps
 import urllib.request
 
 def play(uri, rdm="off", sgl="off", vol=None):
@@ -39,11 +39,25 @@ def getCards():
         print(data)
     return data
 
+    with open("pathtofile", "r") as file:
+        data = load(file)
+    return data
+
+def setCards(json_object):
+    with open("pathtofile", "w") as file:
+        file.write = dumps(json_object, 4)
+    p = Popen(["git", "add", "."]).wait()
+    p = Popen(["git", "commit", "-a", "-m", "added new card(s)"]).wait()
+    p = Popen(["git", "add", "."]).wait()
+    return 
+
+
+
 # TODO:
 # do a git pull as startup script instead of this more dynamic aproach?
 # could use a diffrent repo and git push the new id's on there for easy editing...
 cards = getCards()
-
+newCards = set()
 reader = SimpleMFRC522()
 
 # create and clean the dir new card id's are saved to (you can brows them in iris)
