@@ -29,10 +29,18 @@
 		"rdm":"off",
 		"sgl":"on"
 	},
-	"":{
+	"584189696956":{
 		"name":"batman",
 		"uri":"local:album:md5:471e931312d34cb7590aec47097d069e",
 		"rdm":"off",
 		"sgl":"on"
+	},
+	"585524558233":{
+		"name":"cluedo black",
+		"uri":"spotify:playlist:72WxvtEEgLrn6KFrY2L1Ni",
+		"rdm":"off",
+		"sgl":"on"
 	}
 }
+
+https://open.spotify.com/playlist/?si=bf46eedc2269415e

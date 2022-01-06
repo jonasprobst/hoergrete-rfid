@@ -33,10 +33,12 @@ notes:
 
 ### mopidy
 
-Follow this guide: https://www.makeuseof.com/turn-your-raspberry-pi-into-a-home-music-server-with-mopidy/ 
+Follow this guide: https://www.makeuseof.com/turn-your-raspberry-pi-into-a-home-music-server-with-mopidy/
+A better(?) alternative: https://wiretuts.com/installing-mopidy-music-server-on-raspberry-pi
 
 **important** notes:
 * **do not give iris sudo permission** in step 3. This command is broken an will **kill sudo** for all users!
+* Don't bother with Podcast and Youtube extentions (zero get's abit slow with every thing installed)
 * change audio output to this
   ```
   [audio]
@@ -82,7 +84,8 @@ bcm22 = next,active_low,250
 
 ### mopidy-youtube
 
-Follos theses instructions: https://github.com/natumbri/mopidy-youtube
+**Maybe skip this - didn't get it to work. Plus with spotify the zero get's abit slow to startup...**
+Follow theses instructions: https://github.com/natumbri/mopidy-youtube
 
 note:
 * install youtube-dl and gstreamer1.0-plugins-bad as well
@@ -141,6 +144,10 @@ it's easier than it look ... right :-S
 1. set options: *rdm/random* plays songs randomly (surprise). *sgl/single* plays just one song then stops (i think). 
 1. git commit and push. Wait a minute or so then touch hoergrete again
 1. it should now play your track ... good luck!
+
+### sepcial commands
+
+* Chaning Volume: name `SetVolume`,  uri `0...100`
 
 ## Inspiration and help
 

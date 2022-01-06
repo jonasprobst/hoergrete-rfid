@@ -12,7 +12,7 @@ from time import sleep
 from json import loads
 import urllib.request
 
-def play(uri, rdm="off", sgl="off", vol=None):
+def play(uri, rdm="off", sgl="off"):
     # https://www.systutorials.com/docs/linux/man/1-mpc/
     # other pontentially useful comands:
     # - load <file> (loads <file> as playlist)
@@ -24,8 +24,6 @@ def play(uri, rdm="off", sgl="off", vol=None):
     p = Popen(["mpc", "stop"], stdout=DEVNULL).wait()
     p = Popen(["mpc", "clear"], stdout=DEVNULL).wait()
     p = Popen(["mpc", "add", str(uri)], stdout=DEVNULL).wait()
-    if vol is not None:
-        p = Popen(["mpc", "volume", str(vol)], stdout=DEVNULL).wait()
     p = Popen(["mpc", "random", str(rdm)], stdout=DEVNULL).wait()
     p = Popen(["mpc", "single", str(sgl)], stdout=DEVNULL).wait()
     p = Popen(["mpc", "play"])
@@ -56,13 +54,18 @@ try:
     while True:
         id, text = reader.read()
         if (str(id) in cards):
-            uri = cards[str(id)]["uri"]
-            rdm = cards[str(id)]["rdm"]
-            sgl = cards[str(id)]["sgl"]
-            play(uri, rdm, sgl)
+            if cards[str(id)]["name"] is "SetVolume":
+                vol = cards[str(id)]["uri"]
+                p = Popen(["mpc", "volume", str(vol)], stdout=DEVNULL).wait()
+            else:
+                uri = cards[str(id)]["uri"]
+                rdm = cards[str(id)]["rdm"]
+                sgl = cards[str(id)]["sgl"]
+                play(uri, rdm, sgl)
         else:
             # write a file with the id as name to mopidy so it can be viewed in iris
             # TODO: only reload the json when the file exists already (save some resources, maybe?)
+            p = Popen(["sudo", "rm", "-r", "/var/lib/mopidy/rfid/*"])
             p = Popen(["sudo", "touch", "/var/lib/mopidy/rfid/"+str(id)])
             p = Popen(["mpc", "stop"], stdout=DEVNULL)
             p = Popen(["espeak", "-ven-wm+f2", "-a25", "-s250", "done", "2>/dev/null"], stderr=DEVNULL)
