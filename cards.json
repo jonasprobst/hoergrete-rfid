@@ -1,5 +1,5 @@
 { 
-	"585518925496":{	
+	"584183880453":{	
 		"name":"Kiri and Lou - Singalongsongs",
 		"uri":"local:album:md5:9160794fee93e46d71064f75be07909f",
 		"rdm":"on",
@@ -13,7 +13,7 @@
 	},
 	"786988442629":{
 		"name":"mobility",
-		"uri":"tunein:station:s15200",
+		"uri":"podcast:https://feeds.megaphone.fm/storypirates",
 		"rdm":"off",
 		"sgl":"off"
 	},
@@ -23,7 +23,13 @@
 		"rdm":"off",
 		"sgl":"on"
 	},
-	"0":{
+	"585518925496":{
+		"name":"supreme",
+		"uri":"tunein:station:s15200",
+		"rdm":"off",
+		"sgl":"on"
+	},
+	"1013120044461":{
 		"name":"batman",
 		"uri":"local:album:md5:471e931312d34cb7590aec47097d069e",
 		"rdm":"off",
