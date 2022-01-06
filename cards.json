@@ -1,7 +1,7 @@
 { 
 	"1013120044461":{	
 		"name":"Kiri and Lou - Singalongsongs",
-		"uri":"local:album:md5:9160794fee93e46d71064f75be07909f",
+		"uri":"spotify:album:0d6wsRrnj100hjkM1LsBhI",
 		"rdm":"on",
 		"sgl":"off"
 	},
@@ -13,7 +13,7 @@
 	},
 	"786988442629":{
 		"name":"mobility",
-		"uri":"podcast:https://feeds.megaphone.fm/storypirates",
+		"uri":"tunein:station:s15200",
 		"rdm":"off",
 		"sgl":"off"
 	},
@@ -25,7 +25,7 @@
 	},
 	"585518925496":{
 		"name":"supreme",
-		"uri":"tunein:station:s15200",
+		"uri":"spotify:track:0tm6gsXe0LSm9zeSspyMQu",
 		"rdm":"off",
 		"sgl":"on"
 	},

@@ -70,6 +70,7 @@ Follow this guide: https://pypi.org/project/mopidy-raspberry-gpio/
 
 note:
 * **use sudo to install!!** `sudo python3 -m pip install Mopidy-Raspberry-GPIO`
+* following config for hoergrete:
 
 ```
 [raspberry-gpio]
@@ -78,6 +79,16 @@ bcm17 = play_pause,active_low,250
 bcm27 = prev,active_low,250
 bcm22 = next,active_low,250
 ```
+
+### mopidy-youtube
+
+Follos theses instructions: https://github.com/natumbri/mopidy-youtube
+
+note:
+* install youtube-dl and gstreamer1.0-plugins-bad as well
+* only config needes is enabled=true
+* youtube:video:XbGs_qK2PQA
+* youtube:playlist:PLk4x27Q-FBogD3O6ctl0l3jZ8PeWwzv55
 
 ### mopidy-mpd to controll it using mpc
 
@@ -120,6 +131,13 @@ it's easier than it look ... right :-S
 1. navigate to iris -> Browse/Files/rfid -> "copy URI(s)"
 1. head over to cards.json, create a new section an insert the ID
 1. set Track URI (easiest way is "copy URI(s)" from iris track/album/etc.)
+  * some examples:
+  ```
+  spotify:track:1URRYyEeejU5VYwc8xpB5A
+  podcast+https://feeds.megaphone.fm/storypirates
+  local:album:md5:9160794fee93e46d71064f75be07909f
+  youtube:video:rEaPDNgUPLE
+  ```
 1. set options: *rdm/random* plays songs randomly (surprise). *sgl/single* plays just one song then stops (i think). 
 1. git commit and push. Wait a minute or so then touch hoergrete again
 1. it should now play your track ... good luck!
