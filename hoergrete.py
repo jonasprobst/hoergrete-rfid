@@ -64,6 +64,8 @@ try:
             # write a file with the id as name to mopidy so it can be viewed in iris
             # TODO: only reload the json when the file exists already (save some resources, maybe?)
             p = Popen(["sudo", "touch", "/var/lib/mopidy/rfid/"+str(id)])
+            p = Popen(["mpc", "stop"], stdout=DEVNULL)
+            p = Popen(["espeak", "-ven-wm+f2", "-a25", "-s250", "done", "2>/dev/null"], stderr=DEVNULL)
             cards = getCards()
         sleep(5)
 except KeyboardInterrupt:
