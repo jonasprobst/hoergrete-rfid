@@ -30,6 +30,7 @@ try:
         else:
             print("...")
             sleep(1)
-finally:
-    print("something went wrong!")
+except Exception as e:
+    print(e)
+finally:    
     exit()
