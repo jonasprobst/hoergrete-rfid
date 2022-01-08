@@ -186,8 +186,9 @@ Ideas for improvemnts
 * (Install spidev: `sudo python3 -m pip install spidev`)
 * Install with `sudo python3 -m pip install mopidy-pummeluff`
 * Change the GPIO-Pins to hoergrete setup (do this after every update!!)
-  * `sudo nano /usr/local/bin/python3.7/dist-packages/mopidy_pummeluff/threads/gpio_handler.py`
-  * In Class GPIOHandler change button_pins and led_pin to (**PIN not GPIO**):
+  * `sudo nano /usr/local/lib/python3.7/dist-packages/mopidy_pummeluff/threads/gpio_handler.py`
+  * Adapt Class "GPIOHandler" as follows:
+  * change button_pins and led_pin to (**PIN not GPIO**):
     ```
     button_pins = {
           5: Shutdown,
@@ -200,6 +201,9 @@ Ideas for improvemnts
       led_pin = 38
     ```
   * stop (13) and led_pin (14) are unused GPIOs on hoergrete.
+  * To play a startup sound add the following line in fuction "run" after "GPIO.output(self.led_pin, GPIO.HIGH)" (currently line 65):
+  * play_sound('fanfare.wav')
+  * move fanfare.wav to /usr/local/lib/python3.7/dist-packages/mopidy_pummeluff/sounds
 * There's an open pull-request that needs to be fixed manually: https://github.com/confirm/mopidy-pummeluff/pull/26
 * reboot mopidy: sudo systemctl restart mopidy
 * head to `<rpi ip>:6680/pummeluff` to manage your rfid your cards
