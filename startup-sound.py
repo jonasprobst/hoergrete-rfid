@@ -15,7 +15,7 @@ try:
     while True: #wait for mopidy service
         status = call(["systemctl", "is-active", "--quiet", "mopidy"])
         if status == 0:
-            print("looking for mopidy service")
+            print("mopidy found!")
             break
         else:
             print(...)
@@ -31,4 +31,5 @@ try:
             print("...")
             sleep(1)
 finally:
+    print("something went wrong!")
     exit()
