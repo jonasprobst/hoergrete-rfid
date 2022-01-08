@@ -44,11 +44,12 @@ cards = getCards()
 reader = SimpleMFRC522()
 
 # create and clean the dir new card id's are saved to (you can brows them in iris)
+p = Popen(["sudo", "rm", "-rf", "/var/lib/mopidy/rfid"]).wait()
 p = Popen(["sudo", "mkdir", "-p", "/var/lib/mopidy/rfid"]).wait()
-p = Popen(["sudo", "rm", "-r", "/var/lib/mopidy/rfid/*"])
+
 
 # save the playout and use another way to play it to save resources?
-p = Popen(["espeak", "-ven-wm+f2", "-a25", "alright! let's go!'", "2>/dev/null"], stderr=DEVNULL)
+p = Popen(["espeak", "-ven-wm+f2", "-a25", "alright! let's go!'", "2>/dev/null"])
 
 try:
     while True:
@@ -65,7 +66,7 @@ try:
         else:
             # write a file with the id as name to mopidy so it can be viewed in iris
             # TODO: only reload the json when the file exists already (save some resources, maybe?)
-            p = Popen(["sudo", "rm", "-r", "/var/lib/mopidy/rfid/*"])
+            p = Popen(["sudo", "rm", "-rf", "/var/lib/mopidy/rfid/*"])
             p = Popen(["sudo", "touch", "/var/lib/mopidy/rfid/"+str(id)])
             p = Popen(["mpc", "stop"], stdout=DEVNULL)
             p = Popen(["espeak", "-ven-wm+f2", "-a25", "-s250", "done", "2>/dev/null"], stderr=DEVNULL)
