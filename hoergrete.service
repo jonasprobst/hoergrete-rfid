@@ -1,0 +1,11 @@
+[Unit]
+Description=hoergrete
+
+[Service]
+User=root
+WorkingDirectory=/home/pi/hoergrete-rfid
+ExecStart=/usr/bin/python3 hoergrete-rfid.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

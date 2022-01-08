@@ -62,8 +62,10 @@ sudo nano /etc/mopidy/mopidy.conf
 sudo mopidyctl config
 sudo systemctl restart mopidy
 sudo systemctl status mopidy
+sudo systemctl stop mopidy
 sudo mopidyctl local scan
 sudo mopidyctl local clear
+sudo journalctl -n100 -u mopidy
 ```
 
 ### mopidy gpio
@@ -164,3 +166,41 @@ Thanks you guys!
 * https://pimylifeup.com/raspberry-pi-rfid-rc522/
 * https://wiretuts.com/installing-mopidy-music-server-on-raspberry-pi
 
+
+## mopidy-pummeluff
+
+This looks a promising alternaive: https://github.com/confirm/mopidy-pummeluff/issues.
+Fro a backup of the registered cards copy the folder `/var/lib/mopidy/pummeluff` to a save place from time to time. Also be aware that the boot of all this takes aaaaages on a zero.
+
+Ideas for improvemnts
+* integrate to open pull request #26 (so everything works out of the box again)
+* config the pins in mopidyconfig like mopidy-raspberry-gpio
+* add shuffeling option so ic an be setup in webui for specific cards (https://github.com/hayribakici/mopidy-pummeluff/commit/0fd7655011e83a3f4647b8a4b283795079e24f9d)
+
+### Installation
+
+* Setup raspberry and audio like before
+* install and setup mopidy, mopidy-spotify, mopidy-tunein mopidy-local and samba (**not** espeak, num3words, mopidy-gpio or hoergrete-rfid)
+* Activate SPI: `sudo raspi-config`under `5 Interfacing Options – P4 SPI`
+* Enable SPI for mopidy: `sudo usermod -a -G spi,gpio mopidy`
+* (Install spidev: `sudo python3 -m pip install spidev`)
+* Install with `sudo python3 -m pip install mopidy-pummeluff`
+* Change the GPIO-Pins to hoergrete setup (do this after every update!!)
+  * `sudo nano /usr/local/bin/python3.7/dist-packages/mopidy_pummeluff/threads/gpio_handler.py`
+  * In Class GPIOHandler change button_pins and led_pin to (**PIN not GPIO**):
+    ```
+    button_pins = {
+          5: Shutdown,
+          11: PlayPause,
+          36: Stop,
+          13: PreviousTrack,
+          15: NextTrack,
+      }
+
+      led_pin = 38
+    ```
+  * stop (13) and led_pin (14) are unused GPIOs on hoergrete.
+* There's an open pull-request that needs to be fixed manually: https://github.com/confirm/mopidy-pummeluff/pull/26
+* reboot mopidy: sudo systemctl restart mopidy
+* head to `<rpi ip>:6680/pummeluff` to manage your rfid your cards
+* That's it - now never touch hoergrete software again and you should be fine for years ;-)
