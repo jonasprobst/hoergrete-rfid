@@ -18,7 +18,7 @@ try:
             print("mopidy found!")
             break
         else:
-            print(...)
+            print("...")
             sleep(1)
 
     print("looking for iris")
